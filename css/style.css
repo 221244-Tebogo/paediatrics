@@ -96,7 +96,7 @@ h2 {
 	-moz-outline: none;
 	-webkit-outline: none;
 	font-size: 28px;
-	font-weight: 400;
+	font-weight: 900;
 	color: #000;
 	padding-bottom: 22px;
 	border-bottom: 3px solid;
@@ -106,7 +106,7 @@ h2 {
 
 /*Login/ Sign Up Active Tabs*/
 .form-content .tab .tablinks.active {
-	font-weight: 700;
+	font-weight: 900;
 	color: #0095d4;
 	border-bottom-color: #0095d4;
 }
@@ -215,12 +215,13 @@ h2 {
 	-ms-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	width: 600px;
+	height: 66px;
+	width: 690px;
 	border: none;
 	margin: 5px 0 50px 0px;
 	cursor: pointer;
 	color: #fff;
-	font-weight: 700;
+	font-weight: 900;
 	font-size: 18px;
 }
 
