@@ -1,175 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
+	<meta charset="utf-8">
+	<title>Receptionist Form</title>
+	<!-- Mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+	<!-- Main Style Css -->
+  <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body class="form-v8">
+	<div class="page-content">
+		<div class="form-v8-content">
+			<div class="form-left">
+      <img src="https://image.freepik.com/premium-photo/stuffed-bear-animal-presented-as-pediatrician-holding-stethoscope_12506629.jpg" alt="form">
 
-<h2>Modal Login Form</h2>
+			</div>
+      
+			<div class="form-right">
+				<div class="tab">
+					<div class="tab-inner">
+						<button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Sign Up</button>
+					</div>
+					<div class="tab-inner">
+						<button class="tablinks" onclick="openCity(event, 'sign-in')">Sign In</button>
+					</div>
+				</div>
+				<form class="form-detail" action="register.php" method="post"> <!-- Replace "register.php" with the PHP file to process the registration form -->
+					<div class="tabcontent" id="sign-up">
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="full_name" id="full_name" class="input-text" required>
+								<span class="label">Username</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="your_email" id="your_email" class="input-text" required>
+								<span class="label">E-Mail</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="password" name="password" id="password" class="input-text" required>
+								<span class="label">Password</span>
+								<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="password" name="confirm_password" id="confirm_password" class="input-text" required>
+								<span class="label">Confirm Password</span>
+								<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row-last">
+							<input type="submit" name="register" class="register" value="Register">
+						</div>
+					</div>
+				</form>
+				<form class="form-detail" action="signin.php" method="post"> <!-- Replace "signin.php" with the PHP file to process the sign-in form -->
+					<div class="tabcontent" id="sign-in">
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="username" id="username" class="input-text" required>
+								<span class="label">Username</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="text" name="your_email" id="your_email" class="input-text" required>
+								<span class="label">E-Mail</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="password" name="password" id="password" class="input-text" required>
+								<span class="label">Password</span>
+								<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="password" name="confirm_password" id="confirm_password" class="input-text" required>
+								<span class="label">Confirm Password</span>
+								<span class="border"></span>
+							</label>
+						</div>
+						<div class="form-row-last">
+							<input type="submit" name="signin" class="register" value="Sign In">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function openCity(evt, cityName) {
+		    var i, tabcontent, tablinks;
+		    tabcontent = document.getElementsByClassName("tabcontent");
+		    for (i = 0; i < tabcontent.length; i++) {
+		        tabcontent[i].style.display = "none";
+		    }
+		    tablinks = document.getElementsByClassName("tablinks");
+		    for (i = 0; i < tablinks.length; i++) {
+		        tablinks[i].className = tablinks[i].className.replace(" active", "");
+		    }
+		    document.getElementById(cityName).style.display = "block";
+		    evt.currentTarget.className += " active";
+		}
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="/action_page.php" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-        
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script>
 </body>
 </html>
