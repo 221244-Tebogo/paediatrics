@@ -60,8 +60,8 @@ h2 {
 .form-content .form-left img {
 	border-top-left-radius: 8px;
 	border-bottom-left-radius: 8px;
-    width: 469px;
-    height: 584px;
+	width: 469px;
+	height: 100%;
 }
 
 /*Form Background Colour*/
