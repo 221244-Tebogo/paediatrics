@@ -136,7 +136,18 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
+	<!--Footer --->
+  <!-- Copyright -->
+  <div class="footer" style="background-color: #49443c;">
+    © 2020 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+	<!--End of footer-->
 	<script type="text/javascript">
 		function openCity(evt, cityName) {
 			var i, tabcontent, tablinks;
