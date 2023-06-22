@@ -11,35 +11,22 @@ if (isset($_POST["submit"])) {
    $identity_number = $_POST['identity_number'];
    $gender = $_POST['gender'];
    $race = $_POST['race'];
+   $image = $_POST['image'];
    $role = $_POST['role'];
 
-   // Handle file upload
-   $image = $_FILES['image']['name']; // Get the name of the uploaded file
-   $target_directory = "image/uploads/"; // Specify the directory where the file will be stored
-   $target_file = $target_directory . basename($image); // Specify the path of the uploaded file on the server
-
-   // Move the uploaded file to the target directory
-   if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-      // File upload successful
-      $sql = "INSERT INTO `user`(`id`, `first_name`, `last_name`, `dob`, `identity_number`, `gender`, `race`, `image`, `role`) 
+   $sql = "INSERT INTO `user`(`id`, `first_name`, `last_name`, `dob`, `identity_number`, `gender`, `race`, `image`, `role`) 
            VALUES (NULL, '$first_name', '$last_name', '$dob', '$identity_number', '$gender', '$race', '$image', '$role')";
 
-      $result = mysqli_query($conn, $sql);
+   $result = mysqli_query($conn, $sql);
 
-      if ($result) {
-         header("Location: index.php?msg=New record created successfully");
-         exit();
-      } else {
-         echo "Failed: " . mysqli_error($conn);
-      }
+   if ($result) {
+      header("Location: index.php?msg=New record created successfully");
+      exit();
    } else {
-      echo "Failed to upload file.";
+      echo "Failed: " . mysqli_error($conn);
    }
 }
 ?>
-
-<!-- Rest of your HTML code -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,30 +36,25 @@ if (isset($_POST["submit"])) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-     <!-- Favicon -->
-     <link rel="icon" href="images/paediatrics.ico">
-     
    <!-- Bootstrap -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
    <!-- Google Fonts -->
    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 
-
-   
    <!-- Custom CSS -->
    <link href="style.css" rel="stylesheet">
 
    <!-- Font Awesome -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-   <title>Add New Patient</title>
+   <title>Add New Doctor</title>
 </head>
 
 <body>
    <nav class="navbar navbar-light justify-content-between fs-3 mb-5" style="background-color: #0095d4;">
       <div class="container">
-      <a class="navbar-brand" href="#"><img src="image/logo/paediatrics-logo.png" alt="Logo" width="150"></a>
+         <a class="navbar-brand" href="#"><img src="logo.png" alt="Logo" width="150"></a>
          <div class="d-flex">
             <a class="nav-link text-white" href="#"><i class="fas fa-user"></i> User</a>
             <a class="nav-link text-white" href="#">Logout</a>
@@ -96,7 +78,7 @@ if (isset($_POST["submit"])) {
                <div class="tab-pane fade show active" id="receptionist" role="tabpanel" aria-labelledby="receptionist-tab">
                   <div class="container">
                      <div class="text-center mb-4">
-                        <h3>Add Patient Details</h3>
+                        <h3>Add New Doctor</h3>
                         <p class="text-muted">Your child is a patient</p>
                      </div>
 
@@ -172,10 +154,6 @@ if (isset($_POST["submit"])) {
             </div>
          </div>
       </div>
-      
-   </div>
-   <div class="footer">
-      <p>2023 All rights are reserved to Paediatrics Healthcare</p>
    </div>
 
    <!-- Bootstrap -->
