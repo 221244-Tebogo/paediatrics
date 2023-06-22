@@ -158,7 +158,7 @@ if (isset($_POST["submit"])) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sheila</span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -209,7 +209,7 @@ if (isset($_POST["submit"])) {
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="patient.php" class="btn btn-primary btn-block">View Details</a>
+                                <a href="patientform.php" class="btn btn-primary btn-block">View Details</a>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ h2 {
     line-height: 2px;
     color: #0095d4;
     text-align: center;
+	
 }
 
 /* Rest of your existing CSS code... */
@@ -18,6 +19,7 @@ h2 {
  
  #sidebar {
 	min-height: 100vh;
+	background-color: #5c5c5c;
  }
  
  #v-pills-tab {

@@ -2,13 +2,13 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "PatientForm";
+    $dbname = "Paediatrics";
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-/*if (!$conn){
+if (!$conn){
     die("Connection failed" . mysqli_connect_error());
-}*/
-    echo "Connected Successfully ";
+}
+    
 ?>
 
