@@ -329,3 +329,120 @@ h2 {
 	bottom: 0;
 	width: 100%;
  }
+
+
+/* Landing Page*/
+
+.pexels-gustavo-fring-7446987-1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("images/pexels-gustavo-fring-7446987.jpg");
+	z-index: -1;
+  }
+  
+
+/* Custom CSS styles */
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #337ab7;
+	color: #fff;
+	text-decoration: none;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  
+  /* Landing Page */
+  .frame-268 {
+	align-items: flex-end;
+	border: 1px none;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+  }
+  
+  .overlap-group {
+	height: 100%;
+	position: relative;
+  }
+  
+  .rectangle-35 {
+	background-color: #eaeff1;
+	height: 444px;
+	left: 51px;
+	position: absolute;
+	top: 299px;
+	width: 800px;
+  }
+  
+  .book-health-appointments-247 {
+	color: var(--cerulean);
+	font-family: var(--font-family-poppins);
+	font-size: var(--font-size-1);
+	font-weight: 700;
+	left: 75px;
+	letter-spacing: 0;
+	line-height: normal;
+	position: absolute;
+	top: 317px;
+	width: 379px;
+  }
+  
+  .rectangle-37 {
+	left: 438px;
+	position: absolute;
+	top: 538px;
+  }
+  
+  .practice-login {
+	background-color: var(--cerulean);
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	font-family: var(--font-family-poppins);
+	font-weight: 400;
+	font-size: 14px;
+	text-decoration: none;
+  }
+  
+  .doctors-on-call-drop,
+  .weekly-calendar {
+	font-family: var(--font-family-poppins);
+	font-size: var(--font-size-2);
+	font-weight: 400;
+	color: var(--cerulean);
+	left: 75px;
+	letter-spacing: 0;
+	line-height: normal;
+	position: absolute;
+	top: 462px;
+	width: 265px;
+  }
+  
+  .rectangle-32 {
+	background-color: var(--cerulean);
+	height: 17px;
+	left: 0;
+	position: absolute;
+	top: 913px;
+	width: 100%;
+	z-index: 1;
+  }
+  
+  /* Footer */
+  .footer {
+	background-color: #49443c;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 16pt;
+  }
+  
