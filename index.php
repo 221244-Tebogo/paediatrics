@@ -105,79 +105,60 @@ include "db_conn.php";
       font-size: 16px;
       margin-bottom: 10px;
     }
+
+    .rectangle-35 {
+      background-color: #eaeff1;
+      height: 444px;
+      left: 51px;
+      position: absolute;
+      top: 299px;
+      width: 800px;
+    }
   </style>
 </head>
 
 <body>
-<div class="full-height">
-  <center>
-    <table border="0">
-      <tr>
-        <td width="80%">
-          <img src="images/paediatrics-logo-full-colour.png" alt="Paediatrics Logo" class="paediatrics-logo-1">
-        </td>
-        <td width="10%">
-          <a href="login.php" class="non-style-link"><p class="nav-item">LOGIN</p></a>
-        </td>
-        <td width="10%">
-          <a href="signup.php" class="non-style-link"><p class="nav-item" style="padding-right: 10px;">REGISTER</p></a>
-        </td>
-      </tr>
+<div class="container">
+  <header>
+    <img src="images/paediatrics-logo-full-colour.png" alt="Paediatrics Logo" class="paediatrics-logo-1">
+    <div class="header-links">
+      <a href="login.php" class="non-style-link">LOGIN</a>
+      <a href="signup.php" class="non-style-link">REGISTER</a>
+    </div>
+  </header>
 
-        <td colspan="3">
-          <p class="heading-text">Avoid Hassles & Delays.</p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3">
-          <p class="sub-text2">How is your health today? Sounds like not good!<br>Don't worry. Find your doctor online and book an appointment with eDoc.<br>
-            We offer you a free doctor channeling service. Make your appointment now.</p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3">
-          <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
-            <select>
-              <option value="">Select a doctor</option>
-              <option value="Dr. Molefe">Dr. Molefe</option>
-              <option value="Dr. Knight">Dr. Knight</option>
-              <option value="Dr. Marya Smith">Dr. Marya Smith</option>
-              <option value="Dr. Eric Makibelo">Dr. Eric Makibelo</option>
-            </select>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3">
-          <center>
-            <a href="login.php">
-              <input type="button" value="Make Appointment" class="login-btn btn-primary btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
-            </a>
-          </center>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3">
+  <div class="content">
+    <div class="rectangle-35">
+      <h1 class="heading-text">Avoid Hassles &amp; Delays.</h1>
+      <p class="sub-text2">How is your health today? Sounds like not good!<br>Don't worry. Find your doctor online and book an appointment with eDoc.<br>
+        We offer you a free doctor channeling service. Make your appointment now.</p>
 
-        </td>
-      </tr>
-    </table>
-    <p class="sub-text2 footer-hashen">A Web Solution by Hashen.</p>
-  </center>
+      <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
+        <select>
+          <option value="">Select a doctor</option>
+          <option value="Dr. Molefe">Dr. Molefe</option>
+          <option value="Dr. Knight">Dr. Knight</option>
+          <option value="Dr. Marya Smith">Dr. Marya Smith</option>
+          <option value="Dr. Eric Makibelo">Dr. Eric Makibelo</option>
+        </select>
+      </div>
 
-  <div class="weekly-calendar poppins-bold-cerulean-24px">Weekly calendar</div>
+      <center>
+        <a href="login.php">
+          <input type="button" value="Make Appointment" class="login-btn btn-primary btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
+        </a>
+      </center>
+    </div>
+  </div>
+
+  <footer>
+    <div class="help-booking-online">
+      NEED HELP BOOKING ONLINE? +27 (0) 10 648 9200 admin@paediatrics.co.za
+    </div>
+    <p>2023 All rights are reserved to Paediatrics Healthcare</p>
+  </footer>
 </div>
 
-<div class="rectangle-32"></div>
-
-<div class="help-booking-online">
-  NEED HELP BOOKING ONLINE? +27 (0) 10 648 9200 admin@paediatrics.co.za
-</div>
-<div class="footer">
-  <p>2023 All rights are reserved to Paediatrics Healthcare</p>
-</div>
-
-<!--End of footer-->
 <script type="text/javascript">
   function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
@@ -198,3 +179,5 @@ include "db_conn.php";
 </script>
 </body>
 </html>
+
+
