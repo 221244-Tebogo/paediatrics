@@ -55,7 +55,6 @@ if (isset($_POST["submit"])) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
  
-    <!-- Custom styles for this template -->
       <!-- Custom styles for this template -->
     <link href="css/index.css" rel="stylesheet">
    <!-- Custom CSS -->

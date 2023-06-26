@@ -1,4 +1,6 @@
-
+<?php
+include "db_conn.php"; // Include the database connection file
+?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,11 +1,11 @@
 <?php
 include "db_conn.php";
-?>
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <title>Receptionist Form</title>
   <!-- Mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -13,32 +13,21 @@ include "db_conn.php";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+ 
+  <!-- Custom styles for this template -->
   <link href="css/index.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
   <style>
     /* Custom CSS styles */
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      background-color: #49443c;
       background-image: url("images/pexels-gustavo-fring-7446987.jpg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #337ab7;
-      color: #fff;
-      text-decoration: none;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
     }
 
     .container {
@@ -51,15 +40,6 @@ include "db_conn.php";
 
     .content {
       flex: 1;
-    }
-
-    .footer {
-      background-color: #49443c;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 16pt;
     }
 
     .frame-268 {
@@ -77,15 +57,15 @@ include "db_conn.php";
       position: relative;
     }
 
-    .pexels-gustavo-fring-7446987-1 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-image: url("images/pexels-gustavo-fring-7446987.jpg");
-      z-index: -1;
+    .footer {
+      position: fixed;
+      text-align: center;
+      background-color: #49443c;
+      bottom: 0;
+      width: 100%;
+      color: #fff;
+      padding: 10px;
+      font-weight: bold;
     }
 
     .paediatrics-logo-1 {
@@ -99,11 +79,13 @@ include "db_conn.php";
     .help-booking-online {
       background-color: #545557;
       color: #fff;
-      padding: 10px;
+      padding: 40px;
       text-align: center;
       font-weight: lighter;
-      font-size: 16px;
+      font-size: 20px;
       margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .rectangle-35 {
@@ -113,6 +95,38 @@ include "db_conn.php";
       position: absolute;
       top: 299px;
       width: 800px;
+      padding: 20px;
+    }
+    
+    .header-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .heading-text {
+      margin-top: 0;
+      line-height: 1.5;
+      text-align: left;
+    }
+    
+    .login-btn {
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .login-btn:hover {
+      background-color: #286090;
+    }
+
+    .footer {
+      padding: 10px;
     }
   </style>
 </head>
@@ -122,17 +136,14 @@ include "db_conn.php";
   <header>
     <img src="images/paediatrics-logo-full-colour.png" alt="Paediatrics Logo" class="paediatrics-logo-1">
     <div class="header-links">
-      <a href="login.php" class="non-style-link">LOGIN</a>
-      <a href="signup.php" class="non-style-link">REGISTER</a>
+      <a href="login.php" class="login-btn btn-primary btn">Practice Login</a>
     </div>
   </header>
 
   <div class="content">
     <div class="rectangle-35">
-      <h1 class="heading-text">Avoid Hassles &amp; Delays.</h1>
-      <p class="sub-text2">How is your health today? Sounds like not good!<br>Don't worry. Find your doctor online and book an appointment with eDoc.<br>
-        We offer you a free doctor channeling service. Make your appointment now.</p>
-
+      <h1 class="heading-text">Book Health Appointments 24/7</h1>
+      
       <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
         <select>
           <option value="">Select a doctor</option>
@@ -143,41 +154,59 @@ include "db_conn.php";
         </select>
       </div>
 
-      <center>
-        <a href="login.php">
-          <input type="button" value="Make Appointment" class="login-btn btn-primary btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
-        </a>
-      </center>
+      <div style="text-align: left;">
+        <a href="login.php" class="login-btn btn-primary btn">Make Appointment</a>
+      </div>
     </div>
+    <div id="calendar"></div>
   </div>
 
   <footer>
     <div class="help-booking-online">
       NEED HELP BOOKING ONLINE? +27 (0) 10 648 9200 admin@paediatrics.co.za
     </div>
-    <p>2023 All rights are reserved to Paediatrics Healthcare</p>
+    <div class="footer">2023 All rights are reserved to Paediatrics Healthcare</div>
   </footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script type="text/javascript">
-  function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-
-  // Get the element with id="defaultOpen" and click on it
-  document.getElementById("defaultOpen").click();
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      defaultView: 'month',
+      editable: true,
+      selectable: true,
+      events: [
+        // Add your initial events here (if any)
+      ],
+      dateClick: function(info) {
+        // Create a new appointment on date click
+        var title = prompt('Enter appointment title:');
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: info.dateStr
+          });
+        }
+      },
+      eventClick: function(info) {
+        // Delete the appointment on event click
+        if (confirm("Are you sure you want to delete this appointment?")) {
+          info.event.remove();
+        }
+      }
+    });
+    calendar.render();
+  });
 </script>
 </body>
 </html>
-
 

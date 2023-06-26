@@ -338,10 +338,15 @@ h2 {
 .footer {
 	position: fixed;
 	text-align: center;
-	background-color: #49443c
+	background-color: #49443c;
 	bottom: 0;
 	width: 100%;
- }
+	color: #fff;
+	padding: 10px;
+		text-align: center;
+		font-weight: bold;
+	  }
+
 
 
 /* Landing Page*/
@@ -362,7 +367,7 @@ h2 {
 .button {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #337ab7;
+	background-color: #0095d4;
 	color: #fff;
 	text-decoration: none;
 	border: none;
@@ -370,7 +375,7 @@ h2 {
 	cursor: pointer;
   }
   
-  /* Landing Page */
+
   .frame-268 {
 	align-items: flex-end;
 	border: 1px none;
@@ -395,8 +400,6 @@ h2 {
   
   .book-health-appointments-247 {
 	color: var(--cerulean);
-	font-family: var(--font-family-poppins);
-	font-size: var(--font-size-1);
 	font-weight: 700;
 	left: 75px;
 	letter-spacing: 0;
@@ -419,7 +422,6 @@ h2 {
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
-	font-family: var(--font-family-poppins);
 	font-weight: 400;
 	font-size: 14px;
 	text-decoration: none;
@@ -427,8 +429,6 @@ h2 {
   
   .doctors-on-call-drop,
   .weekly-calendar {
-	font-family: var(--font-family-poppins);
-	font-size: var(--font-size-2);
 	font-weight: 400;
 	color: var(--cerulean);
 	left: 75px;
@@ -448,14 +448,84 @@ h2 {
 	width: 100%;
 	z-index: 1;
   }
-  
-  /* Footer */
-  .footer {
-	background-color: #49443c;
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 16pt;
-  }
-  
+
+  /*CALENDAR*/
+  .calendar {
+    display: flex;
+    flex-flow: column;
+}
+.calendar .header .month-year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #636e73;
+    padding: 20px 0;
+}
+.calendar .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.calendar .days .day_name {
+    width: calc(100% / 7);
+    border-right: 1px solid #2c7aca;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color: #818589;
+    color: #fff;
+    background-color: #448cd6;
+}
+.calendar .days .day_name:nth-child(7) {
+    border: none;
+}
+.calendar .days .day_num {
+    display: flex;
+    flex-flow: column;
+    width: calc(100% / 7);
+    border-right: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    padding: 15px;
+    font-weight: bold;
+    color: #7c878d;
+    cursor: pointer;
+    min-height: 100px;
+}
+.calendar .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 14px;
+}
+.calendar .days .day_num .event {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background-color: #f7c30d;
+    color: #fff;
+    word-wrap: break-word;
+}
+.calendar .days .day_num .event.green {
+    background-color: #51ce57;
+}
+.calendar .days .day_num .event.blue {
+    background-color: #518fce;
+}
+.calendar .days .day_num .event.red {
+    background-color: #ce5151;
+}
+.calendar .days .day_num:nth-child(7n+1) {
+    border-left: 1px solid #e6e9ea;
+}
+.calendar .days .day_num:hover {
+    background-color: #fdfdfd;
+}
+.calendar .days .day_num.ignore {
+    background-color: #fdfdfd;
+    color: #ced2d4;
+    cursor: inherit;
+}
+.calendar .days .day_num.selected {
+    background-color: #f1f2f3;
+    cursor: inherit;
+}
