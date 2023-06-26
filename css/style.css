@@ -203,7 +203,7 @@ h2 {
     left: 0;
     height: 1px;
     width: 100%;
-    background: #53c83c;
+    background: #4c0dcb;
     transform: scaleX(0);
     -moz-transform: scaleX(0);
     -webkit-transform: scaleX(0);
@@ -237,7 +237,7 @@ h2 {
     -o-outline: none;
     -ms-outline: none;
     font-size: 18px;
-    color: #fff;
+    color: #000000;
     font-weight: 300;
     box-sizing: border-box;
     -moz-box-sizing: border-box;

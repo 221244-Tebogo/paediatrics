@@ -6,7 +6,7 @@ include "db_conn.php";
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Receptionist Form</title>
+	<title>Receptionist Login</title>
 	<!-- Mobile -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
@@ -143,11 +143,9 @@ include "db_conn.php";
 		
 	</div>
 	<!--Footer --->
-	<footer class="footer mt-auto py-3 bg-light">
-  <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
-  </div>
-</footer>
+	<footer>
+    <div class="footer">2023 All rights are reserved to Paediatrics Healthcare</div>
+  </footer>
 
 	<!--End of footer-->
 	<script type="text/javascript">
