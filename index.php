@@ -142,8 +142,9 @@ include "db_conn.php";
 
   <div class="content">
     <div class="rectangle-35">
+        
       <h1 class="heading-text">Book Health Appointments 24/7</h1>
-      
+   
       <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
         <select>
           <option value="">Select a doctor</option>
@@ -155,7 +156,7 @@ include "db_conn.php";
       </div>
 
       <div style="text-align: left;">
-        <a href="login.php" class="login-btn btn-primary btn">Make Appointment</a>
+        <a href="login.php" class="login-btn btn-primary btn">Book Appointment</a>
       </div>
     </div>
     <div id="calendar"></div>

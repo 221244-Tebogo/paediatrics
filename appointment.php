@@ -46,18 +46,27 @@ if (isset($_POST["submit"])) {
   <head>
     <meta charset='utf-8' />
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css' rel='stylesheet' />
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/index.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
     <script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js'></script>
     <script>
-
+      // Calendar initialization and configuration
       $(document).ready(function() {
         var calendar = $('#calendar').fullCalendar({
           header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'agendaWeek' // Set the header to only display week view
           },
+          defaultView: 'agendaWeek', // Set the default view to week view
           selectable: true,
           selectHelper: true,
           select: function(start, end) {
@@ -77,10 +86,11 @@ if (isset($_POST["submit"])) {
           }
         });
       });
-
     </script>
   </head>
   <body>
     <div id='calendar'></div>
   </body>
 </html>
+
+
