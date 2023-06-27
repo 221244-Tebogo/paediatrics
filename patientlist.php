@@ -1,49 +1,22 @@
 <?php
 include "db_conn.php"; // Include the database connection file
 
-// Array of gender options
-$gender_options = array("Male", "Female", "Other");
+// Retrieve the list of patients from the database
+$sql = "SELECT * FROM Patient";
+$result = mysqli_query($conn, $sql);
 
-if (isset($_POST["submit"])) {
-   $Name = $_POST['first_name']; // Changed from 'Name' to 'first_name'
-   $Surname = $_POST['last_name']; // Changed from 'Surname' to 'last_name'
-   $Age = $_POST['date_of_birth']; // Changed from 'Age' to 'date_of_birth'
-   $Gender = $_POST['gender']; // Changed from 'Gender' to 'gender'
-   $email = $_POST['email'];
-   $image = $_FILES['profile_image'];
-
-   // Upload image file
-   $target_dir = "uploads/";
-   $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
-   move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
-
-   $sql = "INSERT INTO `Patient`(`Name`, `Surname`, `Age`, `Gender`, `email`, `Image`)
-   VALUES ('$Name', '$Surname', '$Age', '$Gender', '$email', '$image')";
-
-   $result = mysqli_query($conn, $sql);
-
-   if ($result) {
-      header("Location: patientlist.php?msg=New record created successfully");
-      exit();
-   } else {
-      echo "Failed: " . mysqli_error($conn);
-   }
-}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Patient Form</title>
+    <title>Patient List</title>
     
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -57,7 +30,9 @@ if (isset($_POST["submit"])) {
     <link href="style.css" rel="stylesheet">
 </head>
 
-<body id="page-top">
+<body>
+
+body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -144,68 +119,67 @@ if (isset($_POST["submit"])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Patient Form</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Patient Listed</h1>
 
                     <!-- Form -->
-                    <form class="user" method="POST" action="">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" name="first_name" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" name="last_name" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="date_of_birth">Date of Birth</label>
-                                    <input type="date" class="form-control" name="date_of_birth" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender" required>
-                                        <option value="" disabled selected>Select Gender</option>
-                                        <?php
-                                        foreach ($gender_options as $option) {
-                                            echo "<option value='$option'>$option</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="text" class="form-control" name="email" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="profile_image">Profile Image</label>
-                                    <input type="file" class="form-control" name="profile_image" accept="image/*" required>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Submit">
-                    </form>
-                    <!-- End Form -->
-                </div>
-                <!-- /.container-fluid -->
+
+  <div class="container">
+    <?php
+    if (isset($_GET["msg"])) {
+      $msg = $_GET["msg"];
+      // This will display a message if it exists
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      ' . $msg . '
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>';
+    }
+    ?>
+
+    <a href="addPatient.php" class="btn btn-dark mb-3">Add New</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        // Loop through the result set and display the data
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<tr>";
+          echo "<td>" . $row['id'] . "</td>";
+          echo "<td>" . $row['Name'] . "</td>";
+          echo "<td>" . $row['Surname'] . "</td>";
+          echo "<td>" . $row['Age'] . "</td>";
+          echo "<td>" . $row['Gender'] . "</td>";
+          echo "<td>" . $row['email'] . "</td>";
+          echo "<td>";
+          
+          // Check if the image file exists
+          $imagePath = "images/" . $row['Image'];
+
+          if (file_exists($imagePath)) {
+            echo "<img src='" . $imagePath . "' width='50' height='50'>";
+          } else {
+            echo "Image not found";
+          }
+      
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+    <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 
@@ -246,6 +220,7 @@ if (isset($_POST["submit"])) {
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
