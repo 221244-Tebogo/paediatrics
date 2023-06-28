@@ -17,20 +17,19 @@ if (isset($_POST["submit"])) {
    $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
    move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
 
-   $sql = "INSERT INTO `Patient`(`Name`, `Surname`, `Age`, `Gender`, `email`, `Image`)
+   $sql = "INSERT INTO `Doctor`(`Name`, `Surname`, `Age`, `Gender`, `email`, `Image`)
    VALUES ('$Name', '$Surname', '$Age', '$Gender', '$email', '$image')";
 
    $result = mysqli_query($conn, $sql);
 
    if ($result) {
-      header("Location: patientlist.php?msg=New record created successfully");
+      header("Location: doctorlist.php?msg=New record created successfully");
       exit();
    } else {
       echo "Failed: " . mysqli_error($conn);
    }
 }
 ?>
-
 
 
 
@@ -85,7 +84,7 @@ if (isset($_POST["submit"])) {
 
 <!-- Nav Item - Tables Patient Lists -->
 <li class="nav-item">
-    <a class="nav-link active" href="patientlist.php">
+    <a class="nav-link" href="patientlist.php">
         <i class="fas fa-fw fa-users"></i>
         <span>Patients</span>
     </a>
@@ -144,7 +143,7 @@ if (isset($_POST["submit"])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Patient Form</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Doctor Form</h1>
 
                     <!-- Form -->
                     <form class="user" method="POST" action="">
