@@ -79,7 +79,7 @@ if (isset($_POST["submit"])) {
             
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="receptionist.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -90,7 +90,7 @@ if (isset($_POST["submit"])) {
 
             <!-- Nav Item - Tables Patient Lists -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="patientlist.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Patients</span>
                 </a>
@@ -98,7 +98,7 @@ if (isset($_POST["submit"])) {
 
             <!-- Nav Item - Tables Doctor Lists -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="doctorlist.php">
                     <i class="fas fa-fw fa-user-md"></i>
                     <span>Doctors</span>
                 </a>
@@ -158,8 +158,7 @@ if (isset($_POST["submit"])) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sheila</span>
-                                <img class="img-profile rounded-circle"
-                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <img class="img-profile rounded-circle" src="images/receptionist.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -208,7 +207,7 @@ if (isset($_POST["submit"])) {
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                <a href="patientform.php" class="btn btn-primary btn-block">View Details</a>
+                                <a href="patientlist.php" class="btn btn-primary btn-block">View Details</a>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +226,7 @@ if (isset($_POST["submit"])) {
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="doctor.php" class="btn btn-primary btn-block">View Details</a>
+                                    <a href="doctorlist.php" class="btn btn-primary btn-block">View Details</a>
                                 </div>
                             </div>
                         </div>

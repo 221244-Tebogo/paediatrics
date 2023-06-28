@@ -5,10 +5,10 @@ include "db_conn.php"; // Include the database connection file
 $gender_options = array("Male", "Female", "Other");
 
 if (isset($_POST["submit"])) {
-   $Name = $_POST['first_name']; // Changed from 'Name' to 'first_name'
-   $Surname = $_POST['last_name']; // Changed from 'Surname' to 'last_name'
-   $Age = $_POST['date_of_birth']; // Changed from 'Age' to 'date_of_birth'
-   $Gender = $_POST['gender']; // Changed from 'Gender' to 'gender'
+   $Name = $_POST['first_name']; 
+   $Surname = $_POST['last_name']; 
+   $Age = $_POST['date_of_birth'];
+   $Gender = $_POST['gender']; 
    $email = $_POST['email'];
    $image = $_FILES['profile_image'];
 
