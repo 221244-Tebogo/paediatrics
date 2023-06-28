@@ -117,7 +117,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="container">
                         <!-- PHP code... -->
 
-                        <a href="addDoctor.php" class="btn btn-dark mb-3">Add New</a>
+                        <a href="doctorform.php" class="btn btn-dark mb-3">Add New</a>
 
                         <table class="table">
                             <thead>
@@ -127,7 +127,10 @@ $result = mysqli_query($conn, $sql);
                                     <th>Surname</th>
                                     <th>Age</th>
                                     <th>Gender</th>
-                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Specialization</th>
+                                    <th>Doctor Profile</th>
+                                    <th>Room</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -142,7 +145,12 @@ $result = mysqli_query($conn, $sql);
                                     echo "<td>" . $row['Surname'] . "</td>";
                                     echo "<td>" . $row['Age'] . "</td>";
                                     echo "<td>" . $row['Gender'] . "</td>";
-                                    echo "<td>" . $row['email'] . "</td>";
+                                    echo "<td>" . $row['PhoneNumber'] . "</td>";
+                                    echo "<td>" . $row['Specialization'] . "</td>";
+                                    echo "<td>" . $row['DoctorProfile'] . "</td>";
+                                    echo "<td>" . $row['Room'] . "</td>";
+
+
                                     echo "<td>";
 
                                     // Check if the image file exists

@@ -5,19 +5,22 @@ include "db_conn.php";
 $id = $_GET["id"];
 
 if (isset($_POST["submit"])) {
-    $Name = $_POST['Name'];
-    $Surname = $_POST['Surname'];
-    $Age = $_POST['Age'];
-    $Gender = $_POST['Gender'];
-    $email = $_POST['email'];
-    $image = $_FILES['image'];
+    $Name = $_POST['name'];
+    $Surname = $_POST['surname'];
+    $Age = $_POST['age'];
+    $Gender = $_POST['gender'];
+    $PhoneNumber = $_POST['phone_number'];
+    $Specialisation = $_POST['specialization'];
+    $DoctorProfile = $_POST['doctor_profile'];
+    $Room = $_POST['room'];
+    $image = $_FILES['profile_image'];
     
-    $stmt = $conn->prepare("UPDATE `patient` SET `Name`=?, `Surname`=?, `Age`=?, `Gender`=?, `email`=?, `image`=? WHERE id=?");
-    $stmt->bind_param("ssisssi", $Name, $Surname, $Age, $Gender, $email, $image, $id);
+    $stmt = $conn->prepare("UPDATE `doctor` SET `Name`=?, `Surname`=?, `Age`=?, `Gender`=?, `PhoneNumber`=?, `Specialization`=?, `DoctorProfile`=?,`image`=? WHERE id=?");
+    $stmt->bind_param("ssisssi", $Name, $Surname, $Age, $Gender, $PhoneNumber, $Specialization, $DoctorProfile, $image, $id);
     $stmt->execute();
     
     $_SESSION['success_msg'] = "Data updated successfully";
-    header("Location: patientlist.php?success=true");
+    header("Location: doctorlist.php?success=true");
     exit();
 }
 
@@ -32,7 +35,7 @@ if (isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Edit Patient Information</title>
+    <title>Edit Doctor Information</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,7 +84,7 @@ if (isset($_POST["submit"])) {
 
             <!-- Nav Item - Tables Doctor Lists -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="doctorlist.php">
                     <i class="fas fa-fw fa-user-md"></i>
                     <span>Doctors</span>
                 </a>
@@ -111,11 +114,11 @@ if (isset($_POST["submit"])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Edit Patient Information</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Edit Doctor Information</h1>
 
                     <!-- Form -->
                     <?php
-                    $stmt = $conn->prepare("SELECT * FROM `patient` WHERE id=?");
+                    $stmt = $conn->prepare("SELECT * FROM `doctor` WHERE id=?");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();
