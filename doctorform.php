@@ -5,32 +5,34 @@ include "db_conn.php"; // Include the database connection file
 $gender_options = array("Male", "Female", "Other");
 
 if (isset($_POST["submit"])) {
-   $Name = $_POST['first_name']; // Changed from 'Name' to 'first_name'
-   $Surname = $_POST['last_name']; // Changed from 'Surname' to 'last_name'
-   $Age = $_POST['date_of_birth']; // Changed from 'Age' to 'date_of_birth'
-   $Gender = $_POST['gender']; // Changed from 'Gender' to 'gender'
-   $email = $_POST['email'];
-   $image = $_FILES['profile_image'];
+    $Name = $_POST['name'];
+    $Surname = $_POST['surname'];
+    $Age = $_POST['age'];
+    $Gender = $_POST['gender'];
+    $PhoneNumber = $_POST['phone_number'];
+    $Specialisation = $_POST['specialization'];
+    $DoctorProfile = $_POST['doctor_profile'];
+    $Room = $_POST['room'];
+    $image = $_FILES['profile_image'];
 
-   // Upload image file
-   $target_dir = "uploads/";
-   $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
-   move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
+    // Upload image file
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
+    move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
 
-   $sql = "INSERT INTO `Doctor`(`Name`, `Surname`, `Age`, `Gender`, `email`, `Image`)
-   VALUES ('$Name', '$Surname', '$Age', '$Gender', '$email', '$image')";
+    $sql = "INSERT INTO `Doctor`(`Name`, `Surname`, `Age`, `Gender`, `PhoneNumber`, `Specialisation`, `Image`, `Room`)
+            VALUES ('$Name', '$Surname', '$Age', '$Gender', '$PhoneNumber', '$Specialisation', '$target_file', '$Room')";
 
-   $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 
-   if ($result) {
-      header("Location: doctorlist.php?msg=New record created successfully");
-      exit();
-   } else {
-      echo "Failed: " . mysqli_error($conn);
-   }
+    if ($result) {
+        header("Location: doctorlist.php?msg=New record created successfully");
+        exit();
+    } else {
+        echo "Failed: " . mysqli_error($conn);
+    }
 }
 ?>
-
 
 
 <!DOCTYPE html>
@@ -145,64 +147,88 @@ if (isset($_POST["submit"])) {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Doctor Form</h1>
 
-                    <!-- Form -->
-                    <form class="user" method="POST" action="">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" name="first_name" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" name="last_name" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="date_of_birth">Date of Birth</label>
-                                    <input type="date" class="form-control" name="date_of_birth" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender" required>
-                                        <option value="" disabled selected>Select Gender</option>
-                                        <?php
-                                        foreach ($gender_options as $option) {
-                                            echo "<option value='$option'>$option</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="text" class="form-control" name="email" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="profile_image">Profile Image</label>
-                                    <input type="file" class="form-control" name="profile_image" accept="image/*" required>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Submit">
-                    </form>
-                    <!-- End Form -->
+                   <!-- Form -->
+<form class="user" method="POST" action="" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="surname">Surname</label>
+                <input type="text" class="form-control" name="surname" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" name="age" required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="tel" class="form-control" name="phone_number" required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="specialization">Specialization</label>
+                <input type="text" class="form-control" name="specialization" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="doctor_profile">Doctor Profile</label>
+                <textarea class="form-control" name="doctor_profile" required></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="room">Room</label>
+                <select class="form-control" name="room" required>
+                    <option value="" disabled selected>Select Room</option>
+                    <?php
+                        for ($i = 1; $i <= 10; $i++) {
+                            echo "<option value='$i'>$i</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="profile_image">Profile Image</label>
+                <input type="file" class="form-control" name="profile_image" accept="image/*" required>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Submit">
+</form>
+<!-- End Form -->
+
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -254,7 +280,7 @@ if (isset($_POST["submit"])) {
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/index.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 </body>
 
 </html>
