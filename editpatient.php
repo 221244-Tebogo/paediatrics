@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     $stmt->execute();
     
     $_SESSION['success_msg'] = "Data updated successfully";
-    header("Location: patientlist.php");
+    header("Location: patientlist.php?success=true");
     exit();
 }
 
@@ -153,6 +153,14 @@ if (isset($_POST["submit"])) {
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary">Update</button>
                     </form>
+
+                    <!-- Success message -->
+                    <?php if (isset($_SESSION['success_msg'])): ?>
+                        <div class="alert alert-success mt-4">
+                            <?php echo $_SESSION['success_msg']; ?>
+                        </div>
+                        <?php unset($_SESSION['success_msg']); ?>
+                    <?php endif; ?>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -161,7 +169,7 @@ if (isset($_POST["submit"])) {
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <span>&copy; 2023 Company. All rights reserved.</span>
+                    <span>&copy; 2023 All rights are reserved to Paediatrics Healthcare.</span>
                 </div>
             </footer>
             <!-- End of Footer -->

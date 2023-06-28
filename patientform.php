@@ -69,27 +69,27 @@ if (isset($_POST["submit"])) {
                 </div>
             </a>
             
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+             <!-- Divider -->
+             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Tables Patient Lists -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Patients</span>
-                </a>
-            </li>
+<!-- Nav Item - Dashboard -->
+<li class="nav-item">
+    <a class="nav-link" href="receptionist.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+    </a>
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Nav Item - Tables Patient Lists -->
+<li class="nav-item active">
+    <a class="nav-link active" href="patientlist.php">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Patients</span>
+    </a>
+</li>
 
             <!-- Nav Item - Tables Doctor Lists -->
             <li class="nav-item">
@@ -117,8 +117,8 @@ if (isset($_POST["submit"])) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">John Doe</span>
-                                <img class="img-profile rounded-circle" src="images/avatar.jpg">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sheila</span>
+                                <img class="img-profile rounded-circle" src="images/receptionist.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -213,7 +213,7 @@ if (isset($_POST["submit"])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="text-center my-auto">
-                        <span>&copy; 2023 Patient Management System. All rights reserved.</span>
+                        <span>&copy; 2023 All rights are reserved to Paediatrics Healthcare.</span>
                     </div>
                 </div>
             </footer>

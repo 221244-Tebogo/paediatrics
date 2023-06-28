@@ -60,12 +60,9 @@ $result = mysqli_query($conn, $sql);
 
             <!-- Nav Item - Tables Patient Lists -->
             <li class="nav-item active">
-  <a class="nav-link active" href="patientlist.php">
-    <i class="fas fa-fw fa-users"></i>
-    <span>Patients</span>
-  </a>
-</li>
-
+                <a class="nav-link active" href="patientlist.php">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Patients</span>
                 </a>
             </li>
 
@@ -95,7 +92,7 @@ $result = mysqli_query($conn, $sql);
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sheila</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sheila</span>
                                 <img class="img-profile rounded-circle" src="images/receptionist.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -137,7 +134,13 @@ $result = mysqli_query($conn, $sql);
                                       </button>
                                     </div>';
                         }
-                        ?>
+
+                        if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
+                            <!-- Success message -->
+                            <div class="alert alert-success mt-4">
+                                Data updated successfully.
+                            </div>
+                        <?php endif; ?>
 
                         <a href="addPatient.php" class="btn btn-dark mb-3">Add New</a>
 
@@ -176,11 +179,12 @@ $result = mysqli_query($conn, $sql);
                                         echo "Image not found";
                                     }
 
+                                    echo "</td>";
                                     echo "<td>";
                                     echo "<a href='editpatient.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-edit fa-sm fa-fw mr-2 text-gray-400'></i></a>";
                                     echo "<a href='deletePatient.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-trash fa-sm fa-fw mr-2 text-gray-400'></i></a>";
                                     echo "</td>";
-                                    
+                                    echo "</tr>";
                                 }
                                 ?>
                             </tbody>
@@ -194,7 +198,7 @@ $result = mysqli_query($conn, $sql);
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="text-center my-auto">
-                            <span>&copy; 2023 Patient Management System. All rights reserved.</span>
+                            <span>&copy; 2023 All rights are reserved to Paediatrics Healthcare.</span>
                         </div>
                     </div>
                 </footer>
