@@ -285,6 +285,15 @@ h2 {
 	font-size: 18px;
 }
 
+
+/* Calendar Style*/
+#calendar {
+	max-width: 100%;
+	height: 300px; /* Adjust the height as per your requirements */
+	margin: 0 auto;
+  }
+  
+
 /*Form Btn - Hover State*/
 .form-content .form-detail .register:hover {
 	background: #016c99;

@@ -5,6 +5,7 @@ include "db_conn.php"; // Include the database connection file
 $gender_options = array("Male", "Female", "Other");
 
 if (isset($_POST["submit"])) {
+   // Handle patient form submission
    $Name = $_POST['first_name']; 
    $Surname = $_POST['last_name']; 
    $Age = $_POST['date_of_birth'];
@@ -28,10 +29,21 @@ if (isset($_POST["submit"])) {
    } else {
       echo "Failed: " . mysqli_error($conn);
    }
+} elseif (isset($_POST["book_appointment"])) {
+    // Handle appointment booking
+    $doctor = $_POST['doctor'];
+    // Insert the appointment into the database
+    $sql = "INSERT INTO Appointment (DoctorID, AppointmentDate) VALUES ('$doctor', NOW())";
+    $result = mysqli_query($conn, $sql);
+
+    // Check if the query was successful
+    if ($result) {
+        echo "Appointment booked successfully!";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -240,7 +252,7 @@ if (isset($_POST["submit"])) {
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn bntn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>

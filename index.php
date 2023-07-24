@@ -1,12 +1,12 @@
 <?php
 include "db_conn.php";
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-  <title>Receptionist Form</title>
+  <title>Book your appointment</title>
   <!-- Mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Font-->
@@ -17,9 +17,10 @@ include "db_conn.php";
   <!-- Custom styles for this template -->
   <link href="css/index.css" rel="stylesheet">
   <!-- Custom CSS -->
-  <link href="style.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-  <style>
+  <link href="style.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+
+ <style>
     /* Custom CSS styles */
     body {
       margin: 0;
@@ -146,17 +147,16 @@ include "db_conn.php";
       <h1 class="heading-text">Book Health Appointments 24/7</h1>
    
       <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
-        <select>
-          <option value="">Select a doctor</option>
-          <option value="Dr. Molefe">Dr. Molefe</option>
-          <option value="Dr. Knight">Dr. Knight</option>
-          <option value="Dr. Marya Smith">Dr. Marya Smith</option>
-          <option value="Dr. Eric Makibelo">Dr. Eric Makibelo</option>
-        </select>
-      </div>
-
-      <div style="text-align: left;">
-        <a href="login.php" class="login-btn btn-primary btn">Book Appointment</a>
+        <form action="booking.php" method="POST">
+          <select name="doctor">
+            <option value="">Select a doctor</option>
+            <option value="Dr. Molefe">Dr. Molefe</option>
+            <option value="Dr. Knight">Dr. Knight</option>
+            <option value="Dr. Marya Smith">Dr. Marya Smith</option>
+            <option value="Dr. Eric Makibelo">Dr. Eric Makibelo</option>
+          </select>
+          <button type="submit" class="login-btn btn-primary btn" name="submit">Book Appointment</button>
+        </form>
       </div>
     </div>
     <div id="calendar"></div>
@@ -210,4 +210,3 @@ include "db_conn.php";
 </script>
 </body>
 </html>
-

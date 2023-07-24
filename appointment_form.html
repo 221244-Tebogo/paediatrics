@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Appointment Booking</title>
+  <link href='fullcalendar/main.css' rel='stylesheet' />
+  <script src='fullcalendar/main.js'></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Book your appointment now</h1>
+  <div id='calendar'></div>
+
+  <h2>Appointment Details</h2>
+  <form id="appointment-form">
+    <label for="first-name">First name *</label>
+    <input type="text" name="first_name" id="first-name" required>
+    <!-- Add other form fields here -->
+    <input type="submit" value="Book Appointment">
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        selectable: true,
+        dateClick: function (info) {
+          // When the user clicks on a date, populate the hidden input field
+          // with the selected date value so that it can be submitted with the form.
+          document.getElementById('selected-date').value = info.dateStr;
+        }
+      });
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
