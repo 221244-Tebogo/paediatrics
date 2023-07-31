@@ -1,10 +1,11 @@
 <?php
 include "db_conn.php"; // Include the database connection file
 
-// Retrieve the list of doctors from the database
-$sql = "SELECT * FROM Doctor";
-$result = mysqli_query($conn, $sql);
-
+// Check if a new doctor has been added successfully and display a message
+if (isset($_GET['msg'])) {
+    $message = $_GET['msg'];
+    echo "<p style='color: green; font-weight: bold;'>$message</p>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +19,6 @@ $result = mysqli_query($conn, $sql);
     <meta name="author" content="">
     <title>Doctor List</title>
 
-
-    
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -58,13 +57,29 @@ $result = mysqli_query($conn, $sql);
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+
+                  <!-- Nav Item - Tables Patient Lists -->
+                  <li class="nav-item">
+                <a class="nav-link active" href="patientlist.php">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Tables Doctor Lists -->
-            <li class="nav-item active">
+           <li class="nav-item active">
                 <a class="nav-link active" href="doctorlist.php">
                     <i class="fas fa-fw fa-user-md"></i>
                     <span>Doctors</span>
                 </a>
             </li>
+            <!-- Nav Item - Appointments -->
+<li class="nav-item">
+    <a class="nav-link" href="appointments.php">
+        <i class="fas fa-fw fa-calendar"></i>
+        <span>Appointments</span>
+    </a>
+</li>
         </ul>
         <!-- End of Sidebar -->
 
