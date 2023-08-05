@@ -68,11 +68,20 @@ $result = mysqli_query($conn, $sql);
 
             <!-- Nav Item - Tables Doctor Lists -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="doctorlist.php">
                     <i class="fas fa-fw fa-user-md"></i>
                     <span>Doctors</span>
                 </a>
             </li>
+
+            <!-- Nav Item - Appointments -->
+<li class="nav-item">
+    <a class="nav-link" href="appointment.php">
+        <i class="fas fa-fw fa-calendar"></i>
+        <span>Appointments</span>
+    </a>
+</li>
+
         </ul>
         <!-- End of Sidebar -->
 

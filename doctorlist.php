@@ -1,12 +1,10 @@
 <?php
 include "db_conn.php"; // Include the database connection file
 
-// Check if a new doctor has been added successfully and display a message
-if (isset($_GET['msg'])) {
-    $message = $_GET['msg'];
-    echo "<p style='color: green; font-weight: bold;'>$message</p>";
-}
-?>
+// Retrieve the list of doctors from the database
+$sql = "SELECT * FROM Doctors";
+$result = mysqli_query($conn, $sql);
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -130,63 +128,80 @@ if (isset($_GET['msg'])) {
 
                     <!-- Form -->
                     <div class="container">
+                        <?php
+                        if (isset($_GET["msg"])) {
+                            $msg = $_GET["msg"];
+                            // This will display a message if it exists
+                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                      ' . $msg . '
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>';
+                        }
+
+                        if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
+                            <!-- Success message -->
+                            <div class="alert alert-success mt-4">
+                                Data updated successfully.
+                            </div>
+                        <?php endif; ?>
                         <!-- PHP code... -->
 
                         <a href="doctorform.php" class="btn btn-dark mb-3">Add New</a>
 
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Phone Number</th>
-                                    <th>Specialization</th>
-                                    <th>Doctor Profile</th>
-                                    <th>Room</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Loop through the result set and display the data
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['id'] . "</td>";
-                                    echo "<td>" . $row['Name'] . "</td>";
-                                    echo "<td>" . $row['Surname'] . "</td>";
-                                    echo "<td>" . $row['Age'] . "</td>";
-                                    echo "<td>" . $row['Gender'] . "</td>";
-                                    echo "<td>" . $row['PhoneNumber'] . "</td>";
-                                    echo "<td>" . $row['Specialization'] . "</td>";
-                                    echo "<td>" . $row['DoctorProfile'] . "</td>";
-                                    echo "<td>" . $row['Room'] . "</td>";
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Specialisation</th>
+            <th>Doctor Profile</th>
+            <th>Room</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        // Loop through the result set and display the data
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['Name'] . "</td>";
+            echo "<td>" . $row['Surname'] . "</td>";
+            echo "<td>" . $row['Age'] . "</td>";
+            echo "<td>" . $row['Gender'] . "</td>";
+            echo "<td>" . $row['PhoneNumber'] . "</td>";
+            echo "<td>" . $row['Specialisation'] . "</td>";
+            echo "<td>" . $row['DoctorProfile'] . "</td>";
+            echo "<td>" . $row['Room'] . "</td>";
 
+            echo "<td>";
 
-                                    echo "<td>";
+            // Check if the image file exists
+            $imagePath = "images/" . $row['Image'];
 
-                                    // Check if the image file exists
-                                    $imagePath = "images/" . $row['Image'];
+            if (file_exists($imagePath)) {
+                echo "<img src='" . $imagePath . "' width='50' height='50'>";
+            } else {
+                echo "Image not found";
+            }
 
-                                    if (file_exists($imagePath)) {
-                                        echo "<img src='" . $imagePath . "' width='50' height='50'>";
-                                    } else {
-                                        echo "Image not found";
-                                    }
-
-                                    echo "</td>";
-                                    echo "<td>";
-                                    echo "<a href='editdoctor.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-edit fa-sm fa-fw mr-2 text-gray-400'></i></a>";
-                                    echo "<a href='deleteDoctor.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-trash fa-sm fa-fw mr-2 text-gray-400'></i></a>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+            echo "</td>";
+            echo "<td>";
+            echo "<a href='editdoctor.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-edit fa-sm fa-fw mr-2 text-gray-400'></i></a>";
+            echo "<a href='deleteDoctor.php?id=" . $row["id"] . "' class='link-dark'><i class='fas fa-trash fa-sm fa-fw mr-2 text-gray-400'></i></a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
                     </div>
                     <!-- /.container-fluid -->
                 </div>
@@ -206,11 +221,7 @@ if (isset($_GET['msg'])) {
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
+            
             </div>
         </div>
     </div>

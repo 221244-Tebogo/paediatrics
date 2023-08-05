@@ -3,36 +3,52 @@
 <head>
   <meta charset='utf-8' />
   <title>Appointment Booking</title>
-  <link href='fullcalendar/main.css' rel='stylesheet' />
-  <script src='fullcalendar/main.js'></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <h1>Book your appointment now</h1>
-  <div id='calendar'></div>
-
-  <h2>Appointment Details</h2>
-  <form id="appointment-form">
+  
+  <form id="appointment-form" method="POST" action="process_appointment.php">
+    <label for="selected-date">Select a date for your appointment:</label>
+    <input type="date" name="selected_date" id="selected-date" required>
+    
     <label for="first-name">First name *</label>
     <input type="text" name="first_name" id="first-name" required>
-    <!-- Add other form fields here -->
+    
+    <label for="last-name">Last name *</label>
+    <input type="text" name="last_name" id="last-name" required>
+    
+    <label for="phone">Phone *</label>
+    <input type="tel" name="phone" id="phone" required>
+    
+    <label for="email">Email address *</label>
+    <input type="email" name="email" id="email" required placeholder="mail@domain.com">
+    
+    <label for="type-of-appointment">Type of Appointment *</label>
+    <select name="type_of_appointment" id="type-of-appointment" required>
+      <option value="" selected>Select a Type of Appointment</option>
+      <option value="CONSULTATION WITHOUT PROCEDURE">CONSULTATION WITHOUT PROCEDURE</option>
+      <option value="CONSULTATION WITH PROCEDURE">CONSULTATION WITH PROCEDURE</option>
+      <!-- Add other appointment types as needed -->
+    </select>
+    
+    <label for="payment-method">Payment Method *</label>
+    <select name="payment_method" id="payment-method" required>
+      <option value="" selected>Select a Payment Method</option>
+      <option value="Voucher">Voucher</option>
+      <option value="Medical Aid">Medical Aid</option>
+      <option value="Private">Private</option>
+      <option value="Insurance">Insurance</option>
+      <!-- Add other payment methods as needed -->
+    </select>
+    
+    <label for="existing-patient">Have you visited this practice before?</label>
+    <input type="checkbox" name="existing_patient" id="existing-patient">
+    
+    <label for="accept-terms">Do you accept our Terms & Conditions and privacy policy? *</label>
+    <input type="checkbox" name="accept_terms" id="accept-terms" required>
+    
     <input type="submit" value="Book Appointment">
   </form>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const calendarEl = document.getElementById('calendar');
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        selectable: true,
-        dateClick: function (info) {
-          // When the user clicks on a date, populate the hidden input field
-          // with the selected date value so that it can be submitted with the form.
-          document.getElementById('selected-date').value = info.dateStr;
-        }
-      });
-      calendar.render();
-    });
-  </script>
 </body>
 </html>

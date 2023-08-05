@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $Age = $_POST['age'];
     $Gender = $_POST['gender'];
     $PhoneNumber = $_POST['phone_number'];
-    $Specialisation = $_POST['specialization'];
+    $Specialisation = $_POST['specialisation'];
     $DoctorProfile = $_POST['doctor_profile'];
     $Room = $_POST['room'];
     $image = $_FILES['profile_image'];
@@ -20,19 +20,25 @@ if (isset($_POST["submit"])) {
     $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
     move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
 
-    $sql = "INSERT INTO `Doctor`(`Name`, `Surname`, `Age`, `Gender`, `PhoneNumber`, `Specialisation`, `Image`, `Room`)
-            VALUES ('$Name', '$Surname', '$Age', '$Gender', '$PhoneNumber', '$Specialisation', '$target_file', '$Room')";
+    $sql = "INSERT INTO `Doctors`(`Name`, `Surname`, `Age`, `Gender`, `PhoneNumber`, `Specialisation`, `DoctorProfile`, `Image`, `Room`)
+            VALUES ('$Name', '$Surname', '$Age', '$Gender', '$PhoneNumber', '$Specialisation', '$DoctorProfile', '$target_file', '$Room')";
 
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header("Location: doctorlist.php?msg=New record created successfully");
+        // New doctor added successfully, redirect to doctorlist.php
+        header("Location: doctorlist.php?msg=New doctor added successfully");
         exit();
     } else {
         echo "Failed: " . mysqli_error($conn);
     }
 }
 ?>
+
+<!-- Rest of the HTML code goes here -->
+
+
+<!-- HTML form goes here -->
 
 
 <!DOCTYPE html>
@@ -191,8 +197,8 @@ if (isset($_POST["submit"])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="specialization">Specialization</label>
-                <input type="text" class="form-control" name="specialization" required>
+                <label for="specialisation">Specialisation</label>
+                <input type="text" class="form-control" name="specialisation" required>
             </div>
         </div>
     </div>
@@ -263,10 +269,8 @@ if (isset($_POST["submit"])) {
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>

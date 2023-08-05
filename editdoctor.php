@@ -5,20 +5,68 @@ include "db_conn.php";
 $id = $_GET["id"];
 
 if (isset($_POST["submit"])) {
-    $Name = $_POST['name'];
-    $Surname = $_POST['surname'];
-    $Age = $_POST['age'];
-    $Gender = $_POST['gender'];
-    $PhoneNumber = $_POST['phone_number'];
-    $Specialisation = $_POST['specialization'];
-    $DoctorProfile = $_POST['doctor_profile'];
-    $Room = $_POST['room'];
-    $image = $_FILES['profile_image'];
-    
-    $stmt = $conn->prepare("UPDATE `doctor` SET `Name`=?, `Surname`=?, `Age`=?, `Gender`=?, `PhoneNumber`=?, `Specialization`=?, `DoctorProfile`=?,`image`=? WHERE id=?");
-    $stmt->bind_param("ssisssi", $Name, $Surname, $Age, $Gender, $PhoneNumber, $Specialization, $DoctorProfile, $image, $id);
+    $Name = $_POST['Name'];
+    $Surname = $_POST['Surname'];
+    $Age = $_POST['Age'];
+    $Gender = $_POST['Gender'];
+    $PhoneNumber = $_POST['PhoneNumber'];
+    $Specialisation = $_POST['Specialisation'];
+    $DoctorProfile = $_POST['DoctorProfile'];
+    $Room = $_POST['Room'];
+    $image = $_FILES['image'];
+
+    // File upload handling
+    $image_name = $_FILES['image']['name'];
+    $image_tmp_name = $_FILES['image']['tmp_name'];
+    $image_size = $_FILES['image']['size'];
+    $image_error = $_FILES['image']['error'];
+
+    // Check if a new image is uploaded
+    if ($image_error === 0) {
+        $image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
+        $allowed_ext = array('jpg', 'jpeg', 'png');
+
+        // Check if the uploaded file has an allowed extension
+        if (in_array($image_ext, $allowed_ext)) {
+            // Generate a unique filename to avoid conflicts
+            $new_image_name = uniqid('profile_', true) . '.' . $image_ext;
+            $image_path = "images/" . $new_image_name;
+
+            // Move the uploaded file to the destination folder
+            move_uploaded_file($image_tmp_name, $image_path);
+
+            // Remove the old image if it exists
+            $old_image_path = "images/" . $row['Image'];
+            if (file_exists($old_image_path)) {
+                unlink($old_image_path);
+            }
+        } else {
+            $_SESSION['error_msg'] = "Invalid file type. Only JPG, JPEG, and PNG files are allowed.";
+            header("Location: editdoctor.php?id=" . $id);
+            exit();
+        }
+    } else {
+        // No new image uploaded, retain the old image
+        $new_image_name = $row['Image'];
+    }
+
+    // Update the database record with the new data
+    $stmt = $conn->prepare("UPDATE `doctors` SET `Name`=?, `Surname`=?, `Age`=?, `Gender`=?, `PhoneNumber`=?, `Specialisation`=?, `DoctorProfile`=?, `Room`=?, `Image`=? WHERE id=?");
+    $stmt->bind_param(
+        "ssissssssi",
+        $Name,
+        $Surname,
+        $Age,
+        $Gender,
+        $PhoneNumber,
+        $Specialisation,
+        $DoctorProfile,
+        $Room,
+        $new_image_name,
+        $id
+    );
     $stmt->execute();
-    
+
     $_SESSION['success_msg'] = "Data updated successfully";
     header("Location: doctorlist.php?success=true");
     exit();
@@ -117,45 +165,73 @@ if (isset($_POST["submit"])) {
                     <h1 class="h3 mb-4 text-gray-800">Edit Doctor Information</h1>
 
                     <!-- Form -->
-                    <?php
-                    $stmt = $conn->prepare("SELECT * FROM `doctor` WHERE id=?");
-                    $stmt->bind_param("i", $id);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    ?>
+    <?php
+    $stmt = $conn->prepare("SELECT * FROM `doctors` WHERE id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    ?>
 
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="Name">Name:</label>
-                            <input type="text" class="form-control" id="Name" name="Name" value="<?php echo $row['Name']; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Surname">Surname:</label>
-                            <input type="text" class="form-control" id="Surname" name="Surname" value="<?php echo $row['Surname']; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Age">Age:</label>
-                            <input type="number" class="form-control" id="Age" name="Age" value="<?php echo $row['Age']; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Gender">Gender:</label>
-                            <select class="form-control" id="Gender" name="Gender" required>
-                                <option value="Male" <?php if ($row['Gender'] == 'Male') echo 'selected'; ?>>Male</option>
-                                <option value="Female" <?php if ($row['Gender'] == 'Female') echo 'selected'; ?>>Female</option>
-                                <option value="Other" <?php if ($row['Gender'] == 'Other') echo 'selected'; ?>>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $row['email']; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Image:</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                        </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Update</button>
-                    </form>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="<?php echo $row['Name']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Surname">Surname:</label>
+            <input type="text" class="form-control" id="Surname" name="Surname" value="<?php echo $row['Surname']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Age">Age:</label>
+            <input type="number" class="form-control" id="Age" name="Age" value="<?php echo $row['Age']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Gender">Gender:</label>
+            <select class="form-control" id="Gender" name="Gender" required>
+                <option value="Male" <?php if ($row['Gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                <option value="Female" <?php if ($row['Gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                <option value="Other" <?php if ($row['Gender'] == 'Other') echo 'selected'; ?>>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="<?php echo $row['PhoneNumber']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Specialisation">Specialisation:</label>
+            <input type="text" class="form-control" id="Specialisation" name="Specialisation" value="<?php echo $row['Specialisation']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="DoctorProfile">Doctor Profile:</label>
+            <textarea class="form-control" id="DoctorProfile" name="DoctorProfile" rows="5" required><?php echo $row['DoctorProfile']; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Room">Room:</label>
+            <input type="text" class="form-control" id="Room" name="Room" value="<?php echo $row['Room']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Update</button>
+    </form>
+
+    <!-- Success message -->
+    <?php if (isset($_SESSION['success_msg'])): ?>
+        <div class="alert alert-success mt-4">
+            <?php echo $_SESSION['success_msg']; ?>
+        </div>
+        <?php unset($_SESSION['success_msg']); ?>
+    <?php endif; ?>
+
+    <!-- Error message -->
+    <?php if (isset($_SESSION['error_msg'])): ?>
+        <div class="alert alert-danger mt-4">
+            <?php echo $_SESSION['error_msg']; ?>
+        </div>
+        <?php unset($_SESSION['error_msg']); ?>
+    <?php endif; ?>
 
                     <!-- Success message -->
                     <?php if (isset($_SESSION['success_msg'])): ?>
