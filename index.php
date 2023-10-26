@@ -1,3 +1,15 @@
+<?php
+include "db_conn.php"; // Include the database connection file
+
+// Retrieve the list of doctors from the database
+$sql = "SELECT * FROM Doctors";
+$result = mysqli_query($conn, $sql);
+
+// Fetch distinct specializations from the "Doctors" table
+$sql_specializations = "SELECT DISTINCT Specialisation FROM Doctors";
+$result_specializations = mysqli_query($conn, $sql_specializations);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,29 +149,26 @@
 
   <div class="content">
     <div class="rectangle-35">
-      <h1 class="heading-text">Book Health Appointments 24/7</h1>
-      <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
-
-      <!-- Speciality dropdown and "Book Appointment" button -->
-      <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
-        <form action="doctor_info.php" method="POST">
-          <select name="speciality">
-            <option value="">Select a speciality</option>
-            <option value="General Practitioner">General Practitioner</option>
-            <option value="Dentist">Dentist</option>
-            <option value="Aesthetic Practitioner">Aesthetic Practitioner</option>
-            <!-- Add more specialities as needed -->
-          </select>
-          <button type="submit" class="login-btn btn-primary btn" name="submit">Find Doctors</button>
-        </form>
-      </div>
+        <h1 class="heading-text">Book Health Appointments 24/7</h1>
+        <div class="doctors-on-call-drop poppins-bold-cerulean-24px">
+            <form action="doctor_info.php" method="GET">
+                <!-- Dropdown - Specializations -->
+                <label for="specialization">Select a Doctors:</label><br>
+                <select name="specialisation" id="specialisation">
+                    <option value="">Doctor list</option>
+                    <?php
+                   // Display the list of distinct specializations in the dropdown menu
+    while ($row = mysqli_fetch_assoc($result_specializations)) {
+      echo '<option value="' . $row['Specialisation'] . '">' . $row['Specialisation'] . '</option>';
+  }
+  ?>
+                    ?>
+                </select>
+                <button type="submit" class="login-btn btn-primary btn" name="submit">Book Appointment</button>
+            </form>
+        </div>
     </div>
-
-      </div>
-    </div>
-    <!-- This is where the calendar will be displayed -->
-    <div id="calendar"></div>
-  </div>
+</div>
 
   <footer>
     <div class="help-booking-online">

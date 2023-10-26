@@ -5,15 +5,6 @@ include "db_conn.php"; // Include the database connection file
 $sql = "SELECT * FROM Doctors";
 $result = mysqli_query($conn, $sql);
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['date']) && isset($_GET['time'])) {
-        $date = $_GET['date'];
-        $time = $_GET['time'];
-    } else {
-        // Handle invalid or missing parameters, redirect or show an error message.
-    }
-}
-
 // Handle the appointment booking form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['submit'])) {
@@ -21,18 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $doctor = $_POST['doctor'];
         $patientName = $_POST['patient_name'];
         $date = $_POST['date'];
-        $time = $_POST['time'];
+        // $time = $_POST['time'];
+        $selectedDoctorId = $_GET['doctor_id'];
+        // $selectedDoctorId = 2;
 
-        // Insert the appointment into the database
-        // Assuming you have a table `Appointment` to store booked appointments
-        $sql = "INSERT INTO Appointment (DoctorID, PatientName, AppointmentDate, AppointmentTime) VALUES ('$doctor', '$patientName', '$date', '$time')";
-        $result = mysqli_query($conn, $sql);
 
-        // Check if the query was successful
-        if ($result) {
-            echo "Appointment booked successfully!";
+        // Validate the patient name is not empty
+        if (empty($patientName)) {
+            echo "Please enter your name.";
         } else {
-            echo "Error: " . mysqli_error($conn);
+            // Insert the appointment into the database
+            $sql = "INSERT INTO Appointment (AppointmentID, Doctors, TypeOfAppointment, Patient, AppointmentDate ) 
+                    VALUES (null, '$selectedDoctorId', 'General Checkup', '$patientName', '$date')";
+            $result = mysqli_query($conn, $sql);
+
+            // Check if the query was successful
+            if ($result) {
+                echo "Appointment booked successfully!";
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
         }
     }
 }
@@ -40,56 +39,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8' />
-  <title>Appointment Booking</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+<!-- Mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/index.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="style.css" rel="stylesheet"> 
+
 <body>
-  <h1>Book your appointment now</h1>
-  
-  <form id="appointment-form" method="POST" action="process_appointment.php">
-    <label for="selected-date">Select a date for your appointment:</label>
-    <input type="date" name="selected_date" id="selected-date" required>
-    
-    <label for="first-name">First name *</label>
-    <input type="text" name="first_name" id="first-name" required>
-    
-    <label for="last-name">Last name *</label>
-    <input type="text" name="last_name" id="last-name" required>
-    
-    <label for="phone">Phone *</label>
-    <input type="tel" name="phone" id="phone" required>
-    
-    <label for="email">Email address *</label>
-    <input type="email" name="email" id="email" required placeholder="mail@domain.com">
-    
-    <label for="type-of-appointment">Type of Appointment *</label>
-    <select name="type_of_appointment" id="type-of-appointment" required>
-      <option value="" selected>Select a Type of Appointment</option>
-      <option value="CONSULTATION WITHOUT PROCEDURE">CONSULTATION WITHOUT PROCEDURE</option>
-      <option value="CONSULTATION WITH PROCEDURE">CONSULTATION WITH PROCEDURE</option>
-      <!-- Add other appointment types as needed -->
-    </select>
-    
-    <label for="payment-method">Payment Method *</label>
-    <select name="payment_method" id="payment-method" required>
-      <option value="" selected>Select a Payment Method</option>
-      <option value="Voucher">Voucher</option>
-      <option value="Medical Aid">Medical Aid</option>
-      <option value="Private">Private</option>
-      <option value="Insurance">Insurance</option>
-      <!-- Add other payment methods as needed -->
-    </select>
-    
-    <label for="existing-patient">Have you visited this practice before?</label>
-    <input type="checkbox" name="existing_patient" id="existing-patient">
-    
-    <label for="accept-terms">Do you accept our Terms & Conditions and privacy policy? *</label>
-    <input type="checkbox" name="accept_terms" id="accept-terms" required>
-    
-    <input type="submit" value="Book Appointment">
-  </form>
+    <div class="container">
+        <h3>Book your appointment now</h3><br>
+        <form id="appointment-form" method="POST" action="appointment_form.php">
+            <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
+            <input type="hidden" name="time" value="<?php echo htmlspecialchars($time); ?>">
+
+            <div class="content">
+            <!-- Left side: Doctor's Profile -->
+            <?php if (isset($doctorData)) : ?>
+                <div class="doctor-profile">
+                    <h2>Doctor Information</h2>
+                    <p><strong>Name:</strong> <?php echo $doctorData['Name']; ?></p>
+                    <p><strong>Surname:</strong> <?php echo $doctorData['Surname']; ?></p>
+                    <p><strong>Age:</strong> <?php echo $doctorData['Age']; ?></p>
+                    <p><strong>Gender:</strong> <?php echo $doctorData['Gender']; ?></p>
+                    <p><strong>Phone Number:</strong> <?php echo $doctorData['PhoneNumber']; ?></p>
+                    <p><strong>Specialization:</strong> <?php echo $doctorData['Specialization']; ?></p>
+                    <p><strong>Doctor Profile:</strong> <?php echo $doctorData['DoctorProfile']; ?></p>
+                    <p><strong>Room:</strong> <?php echo $doctorData['Room']; ?></p>
+
+                    <!-- Display the doctor's profile image -->
+                    <?php
+                    $imagePath = "uploads/" . $doctorData['Image'];
+                    if (file_exists($imagePath)) {
+                        echo "<img src='" . $imagePath . "' alt='Doctor Profile'>";
+                    } else {
+                        echo "Profile image not available.";
+                    }
+                    ?>
+                </div>
+            <?php else : ?>
+                <!-- Display a message if no doctor is selected -->
+                <p>No doctor selected. Please go back to <a href="doctor_info.php">Doctor Info</a> page and select a doctor.</p>
+            <?php endif; ?>
+
+            
+            <label for="patient-name">Patient Name *</label>
+            <input type="text" name="patient_name" id="patient-name" required>
+
+            <!-- Add other form fields as needed -->
+
+            <input type="submit" name="submit" value="Book Appointment">
+        </form>
+    </div>
 </body>
 </html>
-
