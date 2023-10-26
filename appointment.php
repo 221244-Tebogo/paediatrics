@@ -1,3 +1,4 @@
+Working appointment
 <?php
 include "db_conn.php";
 
@@ -181,9 +182,7 @@ function build_calendar($month, $year)
             </div>
         </header>
 
-
      
-
 
 
         <div class="content">
@@ -214,7 +213,6 @@ function build_calendar($month, $year)
                 <!-- Display a message if no doctor is selected -->
                 <p>No doctor selected. Please go back to <a href="doctor_info.php">Doctor Info</a> page and select a doctor.</p>
             <?php endif; ?>
-
 
            <!-- Right side: Calendar -->
         <div class="calendar">
@@ -287,3 +285,5 @@ function build_calendar($month, $year)
 </body>
 
 </html>
+
+
